@@ -70,8 +70,8 @@ class GameFragment : Fragment() {
 
         // TODO (07) Setup an observer relationship to update binding.timerText
         //  You can use DateUtils.formatElapsedTime to correctly format the long to a time string
-        viewModel.currentTime.observe(this, Observer { remainingTime ->
-            binding.timerText.text = DateUtils.formatElapsedTime(remainingTime)
+        viewModel.currentTime.observe(this, Observer { newTime ->
+            binding.timerText.text = DateUtils.formatElapsedTime(newTime)
         })
 
         // Sets up event listening to navigate the player when the game is finished

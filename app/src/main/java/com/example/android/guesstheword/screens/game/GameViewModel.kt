@@ -78,11 +78,12 @@ class GameViewModel : ViewModel() {
 
             override fun onTick(millisUntilFinished: Long) {
                 // TODO implement what should happen each tick of the timer
-                _currentTime.value = millisUntilFinished
+                _currentTime.value = millisUntilFinished / ONE_SECOND
             }
 
             override fun onFinish() {
                 // TODO implement what should happen when the timer finishes
+                _currentTime.value = DONE
                 _eventGameFinish.value = true
             }
         }
@@ -152,8 +153,12 @@ class GameViewModel : ViewModel() {
 
     fun onGameFinishComplete() {
         _eventGameFinish.value = false
+    }
 
-        // TODO (06) Cancel the timer in onCleared
+    // TODO (06) Cancel the timer in onCleared
+    override fun onCleared() {
+        super.onCleared()
         timer.cancel()
     }
+
 }
