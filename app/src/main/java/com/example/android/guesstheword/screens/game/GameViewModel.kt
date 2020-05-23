@@ -42,12 +42,17 @@ class GameViewModel : ViewModel() {
     private lateinit var wordList: MutableList<String>
 
     // TODO (01) Make a properly encapsulated LiveData called eventGameFinish that holds a
-    // boolean
+    //  boolean
+    val eventGameFinish: LiveData<Boolean>
+        get() = _eventGameFinish
+
+    private val _eventGameFinish = MutableLiveData<Boolean>()
 
     init {
         resetList()
         nextWord()
         _score.value = 0
+        _eventGameFinish.value = false
     }
 
     /**
@@ -88,6 +93,7 @@ class GameViewModel : ViewModel() {
         if (wordList.isEmpty()) {
             // gameFinished() should happen here
             // TODO (03) Set eventGameFinish to true, to signify that the game is over
+            _eventGameFinish.value = true
         } else {
             _word.value = wordList.removeAt(0)
         }
@@ -106,5 +112,9 @@ class GameViewModel : ViewModel() {
     }
 
     // TODO (02) Make the function onGameFinishComplete which makes the value of eventGameFinish
-    // false
+    //  false
+    fun onGameFinishComplete() {
+        _eventGameFinish.value = false
+    }
+
 }
