@@ -53,13 +53,8 @@ class GameFragment : Fragment() {
         viewModel = ViewModelProviders.of(this).get(GameViewModel::class.java)
 
         // TODO (03) Pass the GameViewModel into the data binding - then you can remove the
-        // OnClickListener setup from here
-        binding.correctButton.setOnClickListener {
-            viewModel.onCorrect()
-        }
-        binding.skipButton.setOnClickListener {
-            viewModel.onSkip()
-        }
+        //  OnClickListener setup from here
+        binding.gameViewModel = viewModel
 
         /** Setting up LiveData observation relationship **/
         viewModel.word.observe(this, Observer { newWord ->
